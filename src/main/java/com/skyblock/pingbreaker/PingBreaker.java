@@ -1,6 +1,8 @@
 package com.skyblock.pingbreaker;
 
+import com.skyblock.pingbreaker.commands.PingBreakerToggle;
 import com.skyblock.pingbreaker.network.NetworkInterceptor;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -17,5 +19,6 @@ public class PingBreaker {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new NetworkInterceptor());
+        ClientCommandHandler.instance.registerCommand(new PingBreakerToggle());
     }
 }

@@ -1,6 +1,7 @@
 package com.skyblock.pingbreaker.network;
 
 import com.skyblock.pingbreaker.blacklist.BlockBlacklist;
+import com.skyblock.pingbreaker.commands.PingBreakerToggle;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelPipeline;
 import net.minecraft.client.Minecraft;
@@ -66,7 +67,7 @@ public class NetworkInterceptor {
 
         pipeline.addBefore("packet_handler", "pingbreaker_packet_interceptor", new PacketInterceptor(packet -> {
             // Intercept block digging packets
-            if(!delete) {
+            if(PingBreakerToggle.isEnabled() && !delete) {
                 if (packet != null) {
 
                     if (packet.getStatus() == C07PacketPlayerDigging.Action.START_DESTROY_BLOCK) {
